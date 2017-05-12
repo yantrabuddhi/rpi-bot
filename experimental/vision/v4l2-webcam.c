@@ -16,6 +16,7 @@
 
 /*
  gcc -o web v4l2-webcam.c `pkg-config --cflags --libs sdl` -lSDL_image
+https://jwhsmith.net/2014/12/capturing-a-webcam-stream-using-v4l2/
  */
 
 int main(void){

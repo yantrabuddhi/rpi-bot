@@ -1,6 +1,6 @@
 #include "faceDetect.h"
 
-faceDetect::faceDetect():filterBase("face detect")
+faceDetect::faceDetect():filterBase("human face detect")
 {
     //ctor
     string face_cascade_name = "haarcascade_frontalface_alt.xml";
@@ -17,4 +17,5 @@ bool faceDetect::applyFilter(Mat in,unsigned int in_count,vector<Rect> in_region
     face_cascade.detectMultiScale( in, out_regions, 1.1, 4, 0|CV_HAAR_SCALE_IMAGE, Size(55, 55) );
     out_count=out_regions.size();
     out=in;
+    return true;
 }

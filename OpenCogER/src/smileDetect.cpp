@@ -1,6 +1,6 @@
 #include "smileDetect.h"
 
-smileDetect::smileDetect():filterBase("smile detect")
+smileDetect::smileDetect():filterBase("human smile detect")
 {
     //ctor
     string smile_cascade_name = "haarcascade_smile.xml";
@@ -22,8 +22,12 @@ bool smileDetect::applyFilter(Mat in,unsigned int in_count,vector<Rect> in_regio
         vector<Rect>res;
         roi=in(in_regions[i]);
         smile_cascade.detectMultiScale( roi, res, 1.7, 8, 0|CV_HAAR_SCALE_IMAGE, Size(25, 25) );
-        if (res.size()>0)out_regions.push_back(res[0]);
+        for (int j=0;j<res.size();j++)
+        {
+            out_regions.push_back(res[j]);
+        }
     }
     out_count=out_regions.size();
     out=in;
+    return true;
 }

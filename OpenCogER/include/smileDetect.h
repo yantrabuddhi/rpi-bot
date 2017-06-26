@@ -1,18 +1,18 @@
-#ifndef FACEDETECT_H
-#define FACEDETECT_H
+#ifndef SMILEDETECT_H
+#define SMILEDETECT_H
 
 #include <filterBase.h>
 
 
-class faceDetect : public filterBase
+class smileDetect : public filterBase
 {
     public:
-        faceDetect();
-        virtual ~faceDetect();
+        smileDetect();
+        virtual ~smileDetect();
         virtual bool applyFilter(Mat in,unsigned int in_count,vector<Rect> in_regions,Mat& out,unsigned int& out_count,vector<Rect>& out_regions);
     protected:
     private:
-    CascadeClassifier face_cascade;
+    CascadeClassifier smile_cascade;
 };
 
-#endif // FACEDETECT_H
+#endif // SMILEDETECT_H

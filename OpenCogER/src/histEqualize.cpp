@@ -10,7 +10,7 @@ histEqualize::~histEqualize()
     //dtor
 }
 
-bool applyFilter(Mat in,unsigned int in_count,vector<Rect> in_regions,Mat& out,unsigned int& out_count,vector<Rect>& out_regions)
+bool histEqualize::applyFilter(Mat in,unsigned int in_count,vector<Rect> in_regions,Mat& out,unsigned int& out_count,vector<Rect>& out_regions)
 {
     out_count=in_count;
     out_regions=in_regions;

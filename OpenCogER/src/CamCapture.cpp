@@ -15,7 +15,7 @@ CamCapture::CamCapture(int width,int height,int cam):w(width),h(height),ccam(cam
         {
             capture.set(CV_CAP_PROP_FRAME_WIDTH,w);
             capture.set(CV_CAP_PROP_FRAME_HEIGHT,h);
-            run = new thread(thread_loop,this);
+            run = new thread(CamCapture::thread_loop,this);
         }
     else
         {

@@ -34,8 +34,24 @@
 			<Add option="-Wall" />
 		</Compiler>
 		<Unit filename="include/CamCapture.h" />
+		<Unit filename="include/DetectionTrackerBase.h" />
+		<Unit filename="include/color2gray.h" />
+		<Unit filename="include/faceDetect.h" />
+		<Unit filename="include/filterBase.h" />
+		<Unit filename="include/histEqualize.h" />
+		<Unit filename="include/leftEyeDetect.h" />
+		<Unit filename="include/rightEyeDetect.h" />
+		<Unit filename="include/smileDetect.h" />
 		<Unit filename="src/CamCapture.cpp" />
+		<Unit filename="src/DetectionTrackerBase.cpp" />
+		<Unit filename="src/color2gray.cpp" />
+		<Unit filename="src/faceDetect.cpp" />
+		<Unit filename="src/filterBase.cpp" />
+		<Unit filename="src/histEqualize.cpp" />
+		<Unit filename="src/leftEyeDetect.cpp" />
 		<Unit filename="src/main.cpp" />
+		<Unit filename="src/rightEyeDetect.cpp" />
+		<Unit filename="src/smileDetect.cpp" />
 		<Extensions>
 			<code_completion />
 			<debugger />

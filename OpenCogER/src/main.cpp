@@ -20,5 +20,6 @@ later: face recognition
 make visual detectors .. image ref, rect region,time stamp: in, image ref, count, rect regions,id's, time stamp: out
 
 face detection, smile detection, motion detection, mean shift tracking
-have 5 days
+improve detection based tracking, nose, mouth, smile, face, eyes
+main.cpp or test.cpp
 */

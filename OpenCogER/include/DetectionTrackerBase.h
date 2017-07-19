@@ -18,13 +18,15 @@ using namespace cv;
 
 class DetectionTrackerBase
 {
-    public:
+    public://efficient use for face or object cascade only
         DetectionTrackerBase(string det_name,string casc_file, CamCapture* ccap);
         inline string getName(){return name;}
         void run();
+        void stop();
         inline bool running(){return isRunning;}
         inline string getName(){return name;}
-        bool getTrackedRects(vector<Rect>& rects,vector<int>& id);
+        void getTrackedRects(vector<Rect>& rects);
+        //bool getTrackedRects(vector<Rect>& rects,vector<int>& id);
         virtual ~DetectionTrackerBase();
     protected:
     private:
@@ -32,10 +34,20 @@ class DetectionTrackerBase
     string cascadeFile;
     CamCapture* cc;
     bool isRunning;
-    DetectionBasedTracker* dt;
+    thread* rn;
+    //vector<Rect>prevRects;
+    //vector<int>prevIds;
     vector<Rect>currRects;
-    vector<int>currIds;
+    mutex rd;
+    //vector<int>currIds;
     void track();
+    DetectionBasedTracker::params params;
+    DetectionBasedTracker::obj obj;
+    /*
+    bool point_in_rect(int x,int y,Rect rct);
+    bool rects_overlap(Rect rct1, Rect rct2);
+    void update_ids();
+    */
 }; //run in a thread and pass function for image capture
 
 #endif // DETECTIONTRACKERBASE_H

@@ -6,6 +6,7 @@
   Date: May 2017
 */
 #include "CamCapture.h"
+#include "unistd.h"
 
 CamCapture::CamCapture(int width,int height,int cam):w(width),h(height),ccam(cam),running(false)
 {
@@ -50,7 +51,7 @@ void CamCapture::thread_loop(CamCapture* cc)
         cc->rd.lock();
         (cc->capture)>>(cc->current);
         cc->rd.unlock();
-        int c = waitKey(10);
-
+        //int c = waitKey(10);
+        usleep(10000);//1000
     }
 }

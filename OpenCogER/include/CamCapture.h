@@ -24,7 +24,7 @@ using namespace cv;
 class CamCapture
 {
     public:
-        CamCapture(int width=320;int height=240;int cam = -1);
+        CamCapture(int width=320,int height=240,int cam = -1);
         virtual ~CamCapture();
         Mat getFrame();//Mat is like shared_ptr, make deep copy here and use mutex
     protected:

@@ -24,7 +24,6 @@ class DetectionTrackerBase
         void run();
         void stop();
         inline bool running(){return isRunning;}
-        inline string getName(){return name;}
         void getTrackedRects(vector<Rect>& rects);
         //bool getTrackedRects(vector<Rect>& rects,vector<int>& id);
         virtual ~DetectionTrackerBase();
@@ -40,9 +39,9 @@ class DetectionTrackerBase
     vector<Rect>currRects;
     mutex rd;
     //vector<int>currIds;
-    void track();
-    DetectionBasedTracker::params params;
-    DetectionBasedTracker::obj obj;
+    static void track(DetectionTrackerBase* th);
+    DetectionBasedTracker::Parameters param;
+    DetectionBasedTracker* obj;
     /*
     bool point_in_rect(int x,int y,Rect rct);
     bool rects_overlap(Rect rct1, Rect rct2);

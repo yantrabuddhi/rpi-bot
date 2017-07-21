@@ -9,21 +9,22 @@ DetectionTrackerBase::DetectionTrackerBase(string det_name,string casc_file, Cam
     param.minNeighbors = 3;
     param.minObjectSize = 50;//20
     param.scaleFactor = 1.1;
-    obj=DetectionBasedTracker(cascadeFile,param);
+    //obj=new DetectionBasedTracker(cascadeFile,param);
 }
 
 DetectionTrackerBase::~DetectionTrackerBase()
 {
     //dtor
     stop();
+    //delete obj;
 }
 
 void DetectionTrackerBase::run()
 {
     if (isRunning) return;
-    obj.run();
+    //obj->run();
     isRunning = true;
-    rn = new thread(DetectionTrackerBase::track(),this);
+    rn = new thread(DetectionTrackerBase::track,this);
 }
 
 void DetectionTrackerBase::stop()
@@ -32,6 +33,7 @@ void DetectionTrackerBase::stop()
     {
         isRunning = false;
         rn->join();
+        delete rn;
     }
 }
 
@@ -64,20 +66,25 @@ void DetectionTrackerBase::update_ids()
 
 }
 */
-void DetectionTrackerBase::track()
+void DetectionTrackerBase::track(DetectionTrackerBase *th)
 {
     Mat in,out;
-    while (isRunning)
+    th->obj=new DetectionBasedTracker(th->cascadeFile,th->param);
+
+    th->obj->run();
+    in=th->cc->getFrame();
+    while (th->isRunning)
     {
-        in = cc->getFrame();
-        cvtColor(in,out,COLOR_BGR2GRAY);
-        obj.process(out);
-        rd.lock();
-        obj.getObjects(currRects);
-        rd.unlock();
-        //update_ids();
+        in = th->cc->getFrame();
+        if (in.empty()) continue;
+        cvtColor(in,out,COLOR_BGR2GRAY);//COLOR_BGR2GRAY
+        th->obj->process(out);
+        th->rd.lock();
+        th->obj->getObjects(th->currRects);
+        th->rd.unlock();
     }
-    obj.stop();
+    th->obj->stop();
+    delete th->obj;
 }
 
 void DetectionTrackerBase::getTrackedRects(vector<Rect>& rects)

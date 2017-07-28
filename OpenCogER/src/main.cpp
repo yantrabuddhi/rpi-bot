@@ -44,7 +44,7 @@ using namespace cv;
 
 int main()
 {
-  vector<Rect> faces,smiles;
+  vector<Rect> faces,smiles;//,le,re;
   unsigned int scount=0;
   cv::Rect face_i;
   cv::namedWindow("Detection Based Tracker",cv::WINDOW_NORMAL);
@@ -52,6 +52,10 @@ int main()
 
   CamCapture cc(320,240,1);
   smileDetect sd;
+  //eye cascades work only on full image and not on face roi, 
+  //left-right eyes are not distinguished
+  //leftEyeDetect ld;
+  //rightEyeDetect rd;
   color2gray c2g;
   DetectionTrackerBase dt("face","haarcascade_frontalface_alt.xml",&cc);
   dt.run();
@@ -62,12 +66,16 @@ int main()
     dt.getTrackedRects(img,faces);
     c2g.applyFilter(img,0,vector<Rect>(),img2,scount,smiles);
     sd.applyFilter(img2,faces.size(),faces,img2,scount,smiles);
+    //ld.applyFilter(img2,faces.size(),faces,img2,scount,le);
+    //rd.applyFilter(img2,faces.size(),faces,img2,scount,re);
     for (int i = 0; i < faces.size(); i++)
     {
             	face_i = faces[i];
             	// Make a rectangle around the detected object
             	rectangle(img, face_i, CV_RGB(0, 255,0), 3);
             	if (smiles[i].width>0) rectangle(img, smiles[i], CV_RGB(255,0,0),2);
+            	//if (le[i].width>0) rectangle(img, le[i], CV_RGB(0,0,0),2);
+            	//if (re[i].width>0) rectangle(img, re[i], CV_RGB(0,0,255),2);
             	string box_text = string("Tracked Area ")+std::to_string(i);
             	int pos_x = std::max(face_i.x - 10, 0);
             	int pos_y = std::max(face_i.y - 10, 0);

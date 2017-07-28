@@ -1,5 +1,5 @@
 #include "DetectionTrackerBase.h"
-
+#include "unistd.h"
 DetectionTrackerBase::DetectionTrackerBase(string det_name,string casc_file, CamCapture* ccap):name(det_name),cascadeFile(casc_file),cc(ccap),isRunning(false)
 {
     //ctor
@@ -81,6 +81,7 @@ void DetectionTrackerBase::track(DetectionTrackerBase *th)
         th->img = in;
         th->obj->getObjects(th->currRects);
         th->rd.unlock();
+        usleep(10000);
     }
     th->obj->stop();
     delete th->obj;

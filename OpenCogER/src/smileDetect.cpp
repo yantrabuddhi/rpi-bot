@@ -22,10 +22,8 @@ bool smileDetect::applyFilter(Mat in,unsigned int in_count,vector<Rect> in_regio
         vector<Rect>res;
         roi=in(in_regions[i]);
         smile_cascade.detectMultiScale( roi, res, 1.7, 8, 0|CV_HAAR_SCALE_IMAGE, Size(25, 25) );
-        for (int j=0;j<res.size();j++)
-        {
-            out_regions.push_back(res[j]);
-        }
+        if (res.size()<1) out_regions.push_back(Rect(0,0,0,0));
+        else out_regions.push_back(Rect(in_regions[i].x+res[0].x,in_regions[i].y+res[0].y,res[0].width,res[0].height));
     }
     out_count=out_regions.size();
     out=in;

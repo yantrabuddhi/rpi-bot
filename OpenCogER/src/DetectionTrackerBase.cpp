@@ -70,9 +70,7 @@ void DetectionTrackerBase::track(DetectionTrackerBase *th)
 {
     Mat in,out;
     th->obj=new DetectionBasedTracker(th->cascadeFile,th->param);
-
     th->obj->run();
-    in=th->cc->getFrame();
     while (th->isRunning)
     {
         in = th->cc->getFrame();
@@ -80,6 +78,7 @@ void DetectionTrackerBase::track(DetectionTrackerBase *th)
         cvtColor(in,out,COLOR_BGR2GRAY);//COLOR_BGR2GRAY
         th->obj->process(out);
         th->rd.lock();
+        th->img = in;
         th->obj->getObjects(th->currRects);
         th->rd.unlock();
     }
@@ -87,9 +86,10 @@ void DetectionTrackerBase::track(DetectionTrackerBase *th)
     delete th->obj;
 }
 
-void DetectionTrackerBase::getTrackedRects(vector<Rect>& rects)
+void DetectionTrackerBase::getTrackedRects(Mat& image, vector<Rect>& rects)
 {
    rd.lock();
+   image=img;
    rects=currRects;
    rd.unlock();
 }

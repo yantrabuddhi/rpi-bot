@@ -52,11 +52,11 @@ int main()
   CamCapture cc(320,240,1);
   DetectionTrackerBase dt("face","haarcascade_frontalface_alt.xml",&cc);
   dt.run();
- 
+  //img=cc.getFrame();
   while(1)
   {
-    img=cc.getFrame();
-    dt.getTrackedRects(faces);
+    //img=cc.getFrame();
+    dt.getTrackedRects(img,faces);
     for (int i = 0; i < faces.size(); i++)
     {
             	face_i = faces[i];
@@ -68,6 +68,7 @@ int main()
             	// And now put it into the image:
             	putText(img, box_text, Point(pos_x, pos_y), FONT_HERSHEY_SIMPLEX, 1.0, CV_RGB(0,255,0), 2.0);
     }
+    if (!img.empty())
     cv::imshow("Detection Based Tracker",img);      // Show the results.
     if(cv::waitKey(10) == 27) break;
 

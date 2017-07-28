@@ -24,7 +24,7 @@ class DetectionTrackerBase
         void run();
         void stop();
         inline bool running(){return isRunning;}
-        void getTrackedRects(vector<Rect>& rects);
+        void getTrackedRects(Mat &image, vector<Rect>& rects);
         //bool getTrackedRects(vector<Rect>& rects,vector<int>& id);
         virtual ~DetectionTrackerBase();
     protected:
@@ -36,6 +36,7 @@ class DetectionTrackerBase
     thread* rn;
     //vector<Rect>prevRects;
     //vector<int>prevIds;
+    Mat img;
     vector<Rect>currRects;
     mutex rd;
     //vector<int>currIds;

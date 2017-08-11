@@ -1,0 +1,23 @@
+Author: Mandeep Singh Bhatia
+
+Dependencies:
+Debian derived Ubuntu, Python 2.7, Internet connection to google
+
+[ubuntu 14.04]
+sudo add-apt-repository ppa:mc3man/trusty-media
+sudo apt-get update
+sudo apt-get dist-upgrade
+
+sudo apt-get install python-pip
+sudo pip install --upgrade pip
+sudo apt-get install ffmpeg flac
+
+http://jrmeyer.github.io/installation/2016/01/08/Installing-CMU-Sphinx-on-Ubuntu.html
+
+sudo apt-get install python-dev
+sudo apt-get install portaudio19-dev
+sudo apt-get install python-pyaudio python3-pyaudio
+sudo pip install pydub PyAudio
+
+pip install SpeechRecognition
+
